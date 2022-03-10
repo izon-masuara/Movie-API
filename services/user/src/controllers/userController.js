@@ -1,3 +1,3 @@
 export const userController = (req,res,next) => {
-    res.send('controller user')
+    res.status(200).json('berhasil')
 }
