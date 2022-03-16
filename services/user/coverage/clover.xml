@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646881142064" clover="3.2.0">
-  <project timestamp="1646881142065" name="All files">
-    <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="15" coveredelements="15" complexity="0" loc="13" ncloc="13" packages="3" files="6" classes="6"/>
+<coverage generated="1646888388504" clover="3.2.0">
+  <project timestamp="1646888388504" name="All files">
+    <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="16" coveredelements="16" complexity="0" loc="14" ncloc="14" packages="3" files="6" classes="6"/>
     <package name="src">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/index.js">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="4" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers">
