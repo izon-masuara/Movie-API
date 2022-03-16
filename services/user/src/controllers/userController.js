@@ -1,9 +1,25 @@
 import Users from "../db/model/user"
-export const getAllUser = async (req,res,next) => {
+
+const getAllUser = async (req,res,next) => {
     try {
         const data = await Users.findAll()
         res.status(200).json(data.rows)
     } catch (err) {
         console.log(err)
     }
+}
+
+const createUser = async (req,res,next) => {
+    const payload = req.body
+    try {
+        const data = await Users.createUser(payload)
+        res.status(201).json(data)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export {
+    getAllUser,
+    createUser
 }
