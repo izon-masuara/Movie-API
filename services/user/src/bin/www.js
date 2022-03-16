@@ -1,6 +1,6 @@
 import { app } from '../index.js'
-const port = 3000
+const port = process.env.PORT
 
 app.listen(port, () =>
-  console.log('Example app listening on port 3000!'),
+  console.log(`Example app listening on port ${port}!`),
 );

@@ -4,17 +4,24 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "jest": {
+    "verbose": true
+  },
   "scripts": {
     "start": "npx nodemon --experimental-modules --es-module-specifier-resolution=node src/bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
   },
   "keywords": [],
   "author": "kautsar-masuara",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

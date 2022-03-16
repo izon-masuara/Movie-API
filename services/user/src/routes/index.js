@@ -3,5 +3,5 @@ import { userRouter } from './user'
 import { loginRouter } from './login'
 export const router = express.Router()
 
-router.use('/user',userRouter)
+router.use('/users',userRouter)
 router.use('/login',loginRouter)
