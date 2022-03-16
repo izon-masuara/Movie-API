@@ -2,11 +2,15 @@ import { app } from '../src/index'
 import request from 'supertest'
 
 describe('GET /users', () => {
-    it('responds with json', done => {
+    it('response get all users', done => {
         request(app)
             .get('/users')
             .then(response => {
-                expect(response.status).toBe(200)
+                const { status, body } = response
+                expect(status).toBe(200)
+                expect(body).toEqual(
+                    expect.arrayContaining(body)
+                )
                 done();
             })
             .catch(err => done(err))
