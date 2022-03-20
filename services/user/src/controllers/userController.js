@@ -13,7 +13,7 @@ const createUser = async (req,res,next) => {
     const payload = req.body
     try {
         const data = await Users.createUser(payload)
-        res.status(201).json(data)
+        res.status(201).json(`Email with name ${data.email} created`)
     } catch (err) {
         console.log(err)
     }

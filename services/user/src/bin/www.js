@@ -3,10 +3,10 @@ import migrate from '../db/migration/migrate'
 const port = process.env.PORT
 const command = process.argv[2]
 
-if(command === "migrate"){
+if (command === "migrate") {
   migrate()
-}else{
-  app.listen(port, () =>
-    console.log(`Example app listening on port ${port}!`),
-  );
 }
+
+app.listen(port, () =>
+  console.log(`Example app listening on port ${port}!`),
+);

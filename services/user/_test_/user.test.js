@@ -1,5 +1,22 @@
 import { app } from '../src/index'
 import request from 'supertest'
+import db from '../src/db/config/connection'
+import migrate from '../src/db/migration/migrate'
+
+beforeAll(done => {
+    migrate()
+    done()
+})
+
+afterAll(done => {
+    try {
+        db.query(`DROP TABLE IF EXISTS login_users;`)
+        db.query(`DROP TABLE IF EXISTS users;`)
+    } catch (err) {
+        console.log(err)
+    }
+    done()
+})
 
 describe('GET /users', () => {
     const user1 = {
@@ -30,7 +47,8 @@ describe('GET /users', () => {
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(201)
-                // expect(body).toBe(`Email with name ${user1.email} created`)
+                console.log(body)
+                expect(body).toBe(`Email with name ${user1.email} created`)
                 done();
             })
             .catch(err => done(err))

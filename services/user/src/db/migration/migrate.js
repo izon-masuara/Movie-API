@@ -1,6 +1,6 @@
-import db from '../config/connection'
+import db from '../config/connection.js'
 
-const migrate = async () => {
+const migrate = () => {
     const migration1 = `
         CREATE TABLE IF NOT EXISTS users (
             user_id SERIAL PRIMARY KEY,
@@ -22,10 +22,9 @@ const migrate = async () => {
                 REFERENCES users (user_id)
         );
     `
-    
     try {
-        const data1 = await db.query(migration1)
-        const data2 = await db.query(migration2)
+        const data1 = db.query(migration1)
+        const data2 = db.query(migration2)
         console.log('success')
     } catch (err) {
         console.log(err)

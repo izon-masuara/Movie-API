@@ -46,10 +46,10 @@ class Users {
                 [email,secretPass,userStatus,expired,role,created_at]
             )
 
-            return data
+            return data.rows[0]
 
         } catch (err) {
-            throw err
+            console.log(err)
         }
 
     }

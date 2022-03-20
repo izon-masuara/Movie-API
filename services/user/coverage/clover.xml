@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647449742981" clover="3.2.0">
-  <project timestamp="1647449742982" name="All files">
-    <metrics statements="61" coveredstatements="54" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="8" elements="76" coveredelements="65" complexity="0" loc="61" ncloc="61" packages="6" files="10" classes="10"/>
+<coverage generated="1647796623165" clover="3.2.0">
+  <project timestamp="1647796623165" name="All files">
+    <metrics statements="69" coveredstatements="61" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="9" elements="85" coveredelements="73" complexity="0" loc="69" ncloc="69" packages="7" files="11" classes="11"/>
     <package name="src">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/index.js">
@@ -44,6 +44,20 @@
         <line num="6" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.db.migration">
+      <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="migrate.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/db/migration/migrate.js">
+        <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.db.model">
