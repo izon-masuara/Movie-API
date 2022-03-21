@@ -15,7 +15,7 @@ const createUser = async (req,res,next) => {
         const data = await Users.createUser(payload)
         res.status(201).json(`Email with name ${data.email} created`)
     } catch (err) {
-        console.log(err)
+        next(err.validation)
     }
 }
 

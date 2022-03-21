@@ -27,6 +27,14 @@ describe('GET /users', () => {
         role : `admin`,
     }
 
+    const user2 = {
+        email : `test@mail.com`,
+        password : `test1234`,
+        status : `active`,
+        expired : `2022-01-01`,
+        role : `admin`,
+    }
+
     it('response get all users', done => {
         request(app)
             .get('/users')
@@ -40,6 +48,7 @@ describe('GET /users', () => {
             })
             .catch(err => done(err))
     });
+
     it(`Success create user`, done => {
         request(app)
             .post('/users')
@@ -47,9 +56,21 @@ describe('GET /users', () => {
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(201)
-                console.log(body)
                 expect(body).toBe(`Email with name ${user1.email} created`)
                 done();
+            })
+            .catch(err => done(err))
+    })
+
+    it(`Do not create new user because bad request`, done => {
+        request(app)
+            .post('/users')
+            .send(user2)
+            .then(resp => {
+                const { status,body } = resp
+                expect(status).toBe(400)
+                expect(body).toBe(`Email already exists`)
+                done()
             })
             .catch(err => done(err))
     })

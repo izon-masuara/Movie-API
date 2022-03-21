@@ -1,5 +1,5 @@
 import db from '../config/connection'
-import { isEmail, statusValidate } from '../../helpers/validation'
+import { isEmail, statusValidate, validationUser } from '../model/validation/validation'
 import { hasPass } from '../../helpers/bcrypt'
 
 class Users {
@@ -49,7 +49,8 @@ class Users {
             return data.rows[0]
 
         } catch (err) {
-            console.log(err)
+            const error = validationUser(err)
+            throw error
         }
 
     }
