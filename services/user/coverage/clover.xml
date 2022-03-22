@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647874849929" clover="3.2.0">
-  <project timestamp="1647874849929" name="All files">
-    <metrics statements="79" coveredstatements="71" conditionals="9" coveredconditionals="5" methods="12" coveredmethods="11" elements="100" coveredelements="87" complexity="0" loc="79" ncloc="79" packages="9" files="12" classes="12"/>
+<coverage generated="1647933391607" clover="3.2.0">
+  <project timestamp="1647933391607" name="All files">
+    <metrics statements="93" coveredstatements="80" conditionals="13" coveredconditionals="7" methods="12" coveredmethods="11" elements="118" coveredelements="98" complexity="0" loc="93" ncloc="93" packages="9" files="12" classes="12"/>
     <package name="src">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/index.js">
@@ -14,25 +14,26 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="13" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <metrics statements="14" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="loginController.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/controllers/loginController.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
       </file>
       <file name="userController.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/controllers/userController.js">
-        <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="12" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.db.config">
@@ -61,43 +62,54 @@
       </file>
     </package>
     <package name="src.db.model">
-      <metrics statements="18" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <metrics statements="16" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="user.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/db/model/user.js">
-        <metrics statements="18" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <metrics statements="16" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="29" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
         <line num="45" count="2" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.db.model.validation">
-      <metrics statements="10" coveredstatements="9" conditionals="5" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <metrics statements="23" coveredstatements="19" conditionals="10" coveredconditionals="6" methods="3" coveredmethods="3"/>
       <file name="validation.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/db/model/validation/validation.js">
-        <metrics statements="10" coveredstatements="9" conditionals="5" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <metrics statements="23" coveredstatements="19" conditionals="10" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="cond" truecount="2" falsecount="2"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
-        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.helpers">
@@ -113,14 +125,16 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="7" coveredstatements="4" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="userErrorHeadler.js" path="/home/kautsar/Documents/portfolio/Movie/Movie-API/services/user/src/middlewares/userErrorHeadler.js">
-        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="4" conditionals="3" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="2" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
+        <line num="2" count="2" type="cond" truecount="1" falsecount="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.routes">

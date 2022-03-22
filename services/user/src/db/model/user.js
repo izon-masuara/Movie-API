@@ -25,13 +25,6 @@ class Users {
 
         try {
             const emailUser = isEmail(email)
-
-            if (!emailUser) {
-                throw {
-                    err: `Validation error email must be email`
-                }
-            }
-
             const secretPass = hasPass(password)
             const userStatus = statusValidate(status)
             const created_at = new Date()
@@ -43,7 +36,7 @@ class Users {
             `
 
             const data = await db.query(command,
-                [email,secretPass,userStatus,expired,role,created_at]
+                [emailUser,secretPass,userStatus,expired,role,created_at]
             )
 
             return data.rows[0]

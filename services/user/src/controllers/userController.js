@@ -6,6 +6,10 @@ const getAllUser = async (req,res,next) => {
         res.status(200).json(data.rows)
     } catch (err) {
         console.log(err)
+        next({
+            code : `500`,
+            message : `internal server error`
+        })
     }
 }
 
@@ -15,7 +19,7 @@ const createUser = async (req,res,next) => {
         const data = await Users.createUser(payload)
         res.status(201).json(`Email with name ${data.email} created`)
     } catch (err) {
-        next(err.validation)
+        next(err)
     }
 }
 
