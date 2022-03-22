@@ -12,7 +12,7 @@ const isEmail = (email) => {
 }
 
 const statusValidate = (payload) => {
-    if (payload === 'active' || payload === 'inactive') {
+    if (payload === 'inactive') {
         return payload
     }else{
         throw {

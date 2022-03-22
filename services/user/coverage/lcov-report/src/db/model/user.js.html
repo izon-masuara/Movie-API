@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.29% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/34</span>
+                <span class='fraction'>27/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.29% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/34</span>
+                <span class='fraction'>27/33</span>
             </div>
         
             
@@ -212,10 +212,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,11 +238,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -266,13 +266,13 @@ class Users {
         }
     }
 &nbsp;
-    static async findByID(id){
+    static async findByID(id) {
         const command = `SELECT * FROM users WHERE user_id = ${id}`
         try {
             const data = await db.query(command)
-            if(data.rowCount === 0){
+            if (data.rowCount === 0) {
                 return false
-            }else{
+            } else {
                 return data
             }
         } catch (err) {
@@ -303,10 +303,10 @@ class Users {
             `
 &nbsp;
             const data = await db.query(command,
-                [emailUser,secretPass,userStatus,expired,role,created_at]
+                [emailUser, secretPass, userStatus, expired, role, created_at]
             )
 &nbsp;
-            return data.rows[0]
+<span class="cstat-no" title="statement not covered" >            return data.rows[0]</span>
 &nbsp;
         } catch (err) {
             const error = validationUser(err)
@@ -315,19 +315,20 @@ class Users {
 &nbsp;
     }
 &nbsp;
-    static async updateStatus(payload,id) {
-        const userStatus = statusValidate(payload)
-        const command = `
+    static async updateStatus(payload, id) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (payload === 'active') {
+            const command = `
             UPDATE users
-            SET status = '${userStatus}'
+            SET status = '${payload}'
             WHERE user_id = ${id}
             RETURNING * ;
         `
-        try {
-            const successUpdated = await db.query(command)
-            return successUpdated.rows[0]
-        } catch (err) {
-<span class="cstat-no" title="statement not covered" >            throw err</span>
+            try {
+                const successUpdated = await db.query(command)
+                return successUpdated.rows[0]
+            } catch (err) {
+<span class="cstat-no" title="statement not covered" >                throw err</span>
+            }
         }
     }
 &nbsp;
@@ -337,8 +338,7 @@ class Users {
             WHERE user_id = ${id}
         `
         try {
-            const successDelete = await db.query(command)
-            console.log(successDelete)
+            await db.query(command)
         } catch (err) {
 <span class="cstat-no" title="statement not covered" >            console.log(err)</span>
         }
@@ -352,7 +352,7 @@ export default Users</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Mar 22 2022 17:10:53 GMT+0800 (Central Indonesia Time)
+                at Tue Mar 22 2022 23:16:26 GMT+0800 (Central Indonesia Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

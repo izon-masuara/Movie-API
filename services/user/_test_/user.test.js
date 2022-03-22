@@ -19,26 +19,26 @@ afterAll(done => {
 })
 
 const user1 = {
-    email: `test@mail.com`,
+    email: `kautsarmasuara@gmail.com`,
     password: `test1234`,
-    status: `active`,
-    expired: `2022-01-01`,
+    status: `inactive`,
+    expired: new Date().toISOString().slice(0,10),
     role: `admin`,
 }
 
 const user2 = {
-    email: `test@mail.com`,
+    email: `kautsarmasuara@gmail.com`,
     password: `test1234`,
-    status: `active`,
-    expired: `2022-01-01`,
+    status: `inactive`,
+    expired: new Date().toISOString().slice(0,10),
     role: `admin`,
 }
 
 const user3 = {
     email: `testmailcom`,
     password: `test1234`,
-    status: `active`,
-    expired: `2022-01-01`,
+    status: `inactive`,
+    expired: new Date().toISOString().slice(0,10),
     role: `admin`,
 }
 
@@ -46,7 +46,7 @@ const user4 = {
     email: `test1@mail.com`,
     password: `test1234`,
     status: `asdative`,
-    expired: `2022-01-01`,
+    expired: new Date().toISOString().slice(0,10),
     role: `admin`,
 }
 
@@ -131,11 +131,11 @@ describe(`PATCH /users`, () => {
     it(`success patch status user`, done => {
         request(app)
             .patch('/users/1')
-            .send({status : `inactive`})
+            .send({status : `active`})
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(200)
-                expect(body).toBe(`Email ${user1.email} success updated with status inactive`)
+                expect(body).toBe(`Email ${user1.email} success updated with status active`)
                 done()
             })
     })
@@ -153,7 +153,7 @@ describe(`PATCH /users`, () => {
     })
 })
 
-describe(`Delete user`, () => {
+describe(`Delete /users`, () => {
     it(`Delete User`, done => {
         request(app)
             .delete('/users/1')

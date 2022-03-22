@@ -1,4 +1,5 @@
 import Users from "../db/model/user"
+import { sendMail } from "../helpers/nodemailer"
 
 const getAllUser = async (req, res, next) => {
     try {
@@ -16,6 +17,7 @@ const createUser = async (req, res, next) => {
     const payload = req.body
     try {
         const data = await Users.createUser(payload)
+        sendMail(data.email)
         res.status(201).json(`Email with name ${data.email} created`)
     } catch (err) {
         next(err)
@@ -55,7 +57,7 @@ const deleteUser = async (req,res,next) => {
             })
         }
         const user_id = found.rows[0].user_id
-        const deletedData = await Users.destroy(user_id)
+        await Users.destroy(user_id)
         res.status(200).json(`User with email ${found.rows[0].email} has been deleted`)
     } catch (err) {
         next({
