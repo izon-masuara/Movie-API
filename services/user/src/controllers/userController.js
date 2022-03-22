@@ -1,19 +1,18 @@
 import Users from "../db/model/user"
 
-const getAllUser = async (req,res,next) => {
+const getAllUser = async (req, res, next) => {
     try {
         const data = await Users.findAll()
         res.status(200).json(data.rows)
     } catch (err) {
-        console.log(err)
         next({
-            code : `500`,
-            message : `internal server error`
+            code: `500`,
+            message: `internal server error`
         })
     }
 }
 
-const createUser = async (req,res,next) => {
+const createUser = async (req, res, next) => {
     const payload = req.body
     try {
         const data = await Users.createUser(payload)
@@ -23,7 +22,52 @@ const createUser = async (req,res,next) => {
     }
 }
 
+const updateStatus = async (req, res, next) => {
+    const { status } = req.body
+    const id = +req.params.id
+    try {
+        const found = await Users.findByID(id)
+        if(!found){
+            next({
+                code: `404`,
+                message: `Data not found`
+            })
+        }
+        const user_id = found.rows[0].user_id
+        const success = await Users.updateStatus(status, user_id)
+        res.status(200).json(`Email ${success.email} success updated with status ${success.status}`)
+    } catch (err) {
+        next({
+            code: `500`,
+            message: `Internal server error`
+        })
+    }
+}
+
+const deleteUser = async (req,res,next) => {
+    const id = +req.params.id
+    try {
+        const found = await Users.findByID(id)
+        if(!found){
+            next({
+                code: `404`,
+                message: `Data not found`
+            })
+        }
+        const user_id = found.rows[0].user_id
+        const deletedData = await Users.destroy(user_id)
+        res.status(200).json(`User with email ${found.rows[0].email} has been deleted`)
+    } catch (err) {
+        next({
+            code : `500`,
+            message : `Internal server error`
+        })
+    }
+}
+
 export {
     getAllUser,
-    createUser
+    createUser,
+    updateStatus,
+    deleteUser
 }

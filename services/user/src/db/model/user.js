@@ -13,6 +13,20 @@ class Users {
         }
     }
 
+    static async findByID(id){
+        const command = `SELECT * FROM users WHERE user_id = ${id}`
+        try {
+            const data = await db.query(command)
+            if(data.rowCount === 0){
+                return false
+            }else{
+                return data
+            }
+        } catch (err) {
+            throw err
+        }
+    }
+
     static async createUser(payload) {
 
         const {
@@ -46,6 +60,35 @@ class Users {
             throw error
         }
 
+    }
+
+    static async updateStatus(payload,id) {
+        const userStatus = statusValidate(payload)
+        const command = `
+            UPDATE users
+            SET status = '${userStatus}'
+            WHERE user_id = ${id}
+            RETURNING * ;
+        `
+        try {
+            const successUpdated = await db.query(command)
+            return successUpdated.rows[0]
+        } catch (err) {
+            throw err
+        }
+    }
+
+    static async destroy(id) {
+        const command = `
+            DELETE FROM users
+            WHERE user_id = ${id}
+        `
+        try {
+            const successDelete = await db.query(command)
+            console.log(successDelete)
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

@@ -12,7 +12,6 @@ const isEmail = (email) => {
 }
 
 const statusValidate = (payload) => {
-    console.log(payload)
     if (payload === 'active' || payload === 'inactive') {
         return payload
     }else{

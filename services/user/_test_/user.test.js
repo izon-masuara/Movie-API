@@ -18,30 +18,39 @@ afterAll(done => {
     done()
 })
 
-describe('POST /users', () => {
-    const user1 = {
-        email: `test@mail.com`,
-        password: `test1234`,
-        status: `active`,
-        expired: `2022-01-01`,
-        role: `admin`,
-    }
+const user1 = {
+    email: `test@mail.com`,
+    password: `test1234`,
+    status: `active`,
+    expired: `2022-01-01`,
+    role: `admin`,
+}
 
-    const user2 = {
-        email: `test@mail.com`,
-        password: `test1234`,
-        status: `active`,
-        expired: `2022-01-01`,
-        role: `admin`,
-    }
+const user2 = {
+    email: `test@mail.com`,
+    password: `test1234`,
+    status: `active`,
+    expired: `2022-01-01`,
+    role: `admin`,
+}
 
-    const user3 = {
-        email: `testmailcom`,
-        password: `test1234`,
-        status: `active`,
-        expired: `2022-01-01`,
-        role: `admin`,
-    }
+const user3 = {
+    email: `testmailcom`,
+    password: `test1234`,
+    status: `active`,
+    expired: `2022-01-01`,
+    role: `admin`,
+}
+
+const user4 = {
+    email: `test1@mail.com`,
+    password: `test1234`,
+    status: `asdative`,
+    expired: `2022-01-01`,
+    role: `admin`,
+}
+
+describe('POST Create /users', () => {
 
     it(`Success create user`, done => {
         request(app)
@@ -85,6 +94,21 @@ describe('POST /users', () => {
             })
             .catch(err => done(err))
     })
+
+    it(`Do not create new user because error validation`, done => {
+        request(app)
+            .post('/users')
+            .send(user4)
+            .then(resp => {
+                const { status, body } = resp
+                expect(status).toBe(400)
+                expect(body).toEqual(
+                    expect.arrayContaining(body)
+                )
+                done()
+            })
+            .catch(err => done(err))
+    })
 });
 
 describe('GET /users', () => {
@@ -101,4 +125,43 @@ describe('GET /users', () => {
             })
             .catch(err => done(err))
     });
+})
+
+describe(`PATCH /users`, () => {
+    it(`success patch status user`, done => {
+        request(app)
+            .patch('/users/1')
+            .send({status : `inactive`})
+            .then(resp => {
+                const { status,body } = resp
+                expect(status).toBe(200)
+                expect(body).toBe(`Email ${user1.email} success updated with status inactive`)
+                done()
+            })
+    })
+
+    it(`Data which want to update not found`, done => {
+        request(app)
+            .patch('/users/2')
+            .send({status : `inactive`})
+            .then(resp => {
+                const { status,body } = resp
+                expect(status).toBe(404)
+                expect(body).toBe('Data not found')
+                done()
+            })
+    })
+})
+
+describe(`Delete user`, () => {
+    it(`Delete User`, done => {
+        request(app)
+            .delete('/users/1')
+            .then(resp => {
+                const { status,body } = resp
+                expect(status).toBe(200)
+                expect(body).toBe(`User with email ${user1.email} has been deleted`)
+                done()
+            })
+    })
 })
