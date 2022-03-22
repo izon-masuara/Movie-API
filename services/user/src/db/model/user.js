@@ -13,13 +13,13 @@ class Users {
         }
     }
 
-    static async findByID(id){
+    static async findByID(id) {
         const command = `SELECT * FROM users WHERE user_id = ${id}`
         try {
             const data = await db.query(command)
-            if(data.rowCount === 0){
+            if (data.rowCount === 0) {
                 return false
-            }else{
+            } else {
                 return data
             }
         } catch (err) {
@@ -50,7 +50,7 @@ class Users {
             `
 
             const data = await db.query(command,
-                [emailUser,secretPass,userStatus,expired,role,created_at]
+                [emailUser, secretPass, userStatus, expired, role, created_at]
             )
 
             return data.rows[0]
@@ -62,19 +62,20 @@ class Users {
 
     }
 
-    static async updateStatus(payload,id) {
-        const userStatus = statusValidate(payload)
-        const command = `
+    static async updateStatus(payload, id) {
+        if (payload === 'active') {
+            const command = `
             UPDATE users
-            SET status = '${userStatus}'
+            SET status = '${payload}'
             WHERE user_id = ${id}
             RETURNING * ;
         `
-        try {
-            const successUpdated = await db.query(command)
-            return successUpdated.rows[0]
-        } catch (err) {
-            throw err
+            try {
+                const successUpdated = await db.query(command)
+                return successUpdated.rows[0]
+            } catch (err) {
+                throw err
+            }
         }
     }
 
@@ -84,8 +85,7 @@ class Users {
             WHERE user_id = ${id}
         `
         try {
-            const successDelete = await db.query(command)
-            console.log(successDelete)
+            await db.query(command)
         } catch (err) {
             console.log(err)
         }
