@@ -9,6 +9,12 @@ const errorUserHandler = (err, req, res, next) => {
         case `500`:
             res.status(500).json(err.message)
             break;
+        case `999`:
+            res.status(400).json(err.message)
+            break;
+        case `998`:
+            res.status(400).json(err.message)
+            break;
         default:
             break;
     }

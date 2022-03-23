@@ -50,6 +50,14 @@ const user4 = {
     role: `admin`,
 }
 
+const user5 = {
+    email: `testing423798@gmail.com`,
+    password: `test1234`,
+    status: `inactive`,
+    expired: new Date().toISOString().slice(0,10),
+    role: `admin`,
+}
+
 describe('POST Create /users', () => {
 
     it(`Success create user`, done => {
@@ -109,6 +117,19 @@ describe('POST Create /users', () => {
             })
             .catch(err => done(err))
     })
+
+    it(`Success create user`, done => {
+        request(app)
+            .post('/users')
+            .send(user5)
+            .then(resp => {
+                const { status, body } = resp
+                expect(status).toBe(201)
+                expect(body).toBe(`Email with name ${user5.email} created`)
+                done();
+            })
+            .catch(err => done(err))
+    })
 });
 
 describe('GET /users', () => {
@@ -131,7 +152,7 @@ describe(`PATCH /users`, () => {
     it(`success patch status user`, done => {
         request(app)
             .patch('/users/1')
-            .send({status : `active`})
+            .send({money : 20000})
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(200)
@@ -143,11 +164,23 @@ describe(`PATCH /users`, () => {
     it(`Data which want to update not found`, done => {
         request(app)
             .patch('/users/2')
-            .send({status : `inactive`})
+            .send({money : 20000})
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(404)
                 expect(body).toBe('Data not found')
+                done()
+            })
+    })
+
+    it(`Status faild update because money does not 20000`, done => {
+        request(app)
+            .patch('/users/2')
+            .send({money : 2000})
+            .then(resp => {
+                const { status,body } = resp
+                expect(status).toBe(400)
+                expect(body).toBe('Your money must be 20000')
                 done()
             })
     })
@@ -156,11 +189,11 @@ describe(`PATCH /users`, () => {
 describe(`Delete /users`, () => {
     it(`Delete User`, done => {
         request(app)
-            .delete('/users/1')
+            .delete('/users/3')
             .then(resp => {
                 const { status,body } = resp
                 expect(status).toBe(200)
-                expect(body).toBe(`User with email ${user1.email} has been deleted`)
+                expect(body).toBe(`User with email ${user5.email} has been deleted`)
                 done()
             })
     })
