@@ -1,7 +1,7 @@
 import midtransClient from 'midtrans-client'
 const payment = (req, res, next) => {
     const { money } = req.body
-    if (money !== 20000) {
+    if (Number(money) !== 20000) {
         next({
             code: `999`,
             message: `Your money must be 20000`
@@ -9,7 +9,7 @@ const payment = (req, res, next) => {
     }
     let core = new midtransClient.CoreApi({
         isProduction: false,
-        serverKey: `SB-Mid-server-GwUP_WGbJPXsDzsNEBRs8IYA`,
+        serverKey: process.env.MIDTRANS,
     });
 
     // prepare CORE API parameter ( refer to: https://docs.midtrans.com/en/core-api/bank-transfer?id=sample-request-and-request-body ) charge bank_transfer parameter example
@@ -17,7 +17,7 @@ const payment = (req, res, next) => {
         "payment_type": "bank_transfer",
         "transaction_details": {
             "gross_amount": money,
-            "order_id": `test-${Math.random()}-${Math.random()}}`,
+            "order_id": `terting-${Math.random()}`,
         },
         "bank_transfer": {
             "bank": "bni"
@@ -29,6 +29,7 @@ const payment = (req, res, next) => {
             next()
         })
         .catch((e) => {
+            console.log(e)
             next({
                 code: `998`,
                 message: `Faild transaction`

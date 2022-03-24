@@ -16,15 +16,16 @@ const migrate = () => {
     const migration2 = `
         CREATE TABLE IF NOT EXISTS login_users (
             login_id SERIAL PRIMARY KEY,
-            user_id INT NOT NULL,
+            user_id INT UNIQUE NOT NULL,
             code_device VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP NOT NULL,
             FOREIGN KEY(user_id)
                 REFERENCES users (user_id)
         );
     `
     try {
-        const data1 = db.query(migration1)
-        const data2 = db.query(migration2)
+        db.query(migration1)
+        db.query(migration2)
         console.log('success')
     } catch (err) {
         console.log(err)

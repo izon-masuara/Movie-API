@@ -12,8 +12,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS login_users (
     login_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT UNIQUE NOT NULL,
     code_device VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
     FOREIGN KEY(user_id)
         REFERENCES users (user_id)
 );

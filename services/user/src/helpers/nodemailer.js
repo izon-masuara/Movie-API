@@ -19,10 +19,13 @@ const sendMail = (email) => {
     mailTransporter.sendMail(options
         , function (error, info) {
             if (error) {
-                console.log(error);
+                throw {
+                    code : '400',
+                    message : `Email does not success send`
+                }
             }
             else {
-                console.log('Email sent: ' + info.response);
+                return 'Email sent: ' + info.response
             }
         }
     )
