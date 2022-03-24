@@ -15,6 +15,56 @@ class Login {
             throw err
         }
     }
+
+    static async getAll() {
+        const command = `
+            SELECT * 
+            FROM login_users as a
+            FULL JOIN users as b 
+            ON a.user_id = b.user_id
+        `
+        try {
+            const data = await db.query(command)
+            return data.rows
+        } catch (err) {
+            throw {
+                code : `996`,
+                message : `Error get login_users`
+            }
+        }
+    }
+
+    static async findById(id){
+        const command = `
+            SELECT *
+            FROM login_users
+            WHERE user_id = ${id}
+        `
+        try {
+            const data = await db.query(command)
+            return data.rows[0]
+        } catch (err) {
+            throw {
+                code : '500',
+                message : "Internal server error"
+            }
+        }
+    }
+
+    static async logOut(user_id) {
+        const command = `
+            DELETE FROM login_users
+            WHERE user_id = ${user_id} 
+        `
+        try {
+            await db.query(command)
+        } catch (err) {
+            throw {
+                code : '500',
+                message : 'Internal server error'
+            }          
+        }
+    }
 }
 
 export default Login

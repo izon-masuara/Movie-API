@@ -21,8 +21,34 @@ const loginController = async (req, res, next) => {
             }
         }
         const token = signJwt(data)
-        await Login.login(data.user_id,token)
+        await Login.login(data.user_id, token)
         res.status(200).json({ access_token: token })
+    } catch (err) {
+        next(err)
+    }
+}
+
+const getAll = async (req, res, next) => {
+    try {
+        const data = await Login.getAll()
+        res.status(200).json(data)
+    } catch (err) {
+        next(err)
+    }
+}
+
+const logOut = async (req, res, next) => {
+    const { id } = req.params
+    try {
+        const found = await Login.findById(+id)
+        if (!found) {
+            throw {
+                code: '404',
+                message: "Data not found"
+            }
+        }
+        await Login.logOut(+id)
+        res.status(200).json(`Logout`)
     } catch (err) {
         next(err)
     }
@@ -30,4 +56,6 @@ const loginController = async (req, res, next) => {
 
 export {
     loginController,
+    getAll,
+    logOut
 }
