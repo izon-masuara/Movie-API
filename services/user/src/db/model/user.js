@@ -4,7 +4,10 @@ import { hasPass } from '../../helpers/bcrypt'
 
 class Users {
     static async findAll() {
-        const command = `SELECT * FROM users`
+        const command = `
+        SELECT *
+        FROM users
+        `
         try {
             const data = await db.query(command)
             return data
@@ -14,7 +17,10 @@ class Users {
     }
 
     static async findByID(id) {
-        const command = `SELECT * FROM users WHERE user_id = ${id}`
+        const command = `
+        SELECT *
+        FROM users 
+        WHERE user_id = ${id}`
         try {
             const data = await db.query(command)
             if (data.rowCount === 0) {
@@ -87,7 +93,21 @@ class Users {
         try {
             await db.query(command)
         } catch (err) {
-            console.log(err)
+            throw err
+        }
+    }
+
+    static async findOne(coulmn,search){
+        const command = `
+            SELECT user_id, email, status, password, role
+            FROM users
+            WHERE ${coulmn} = '${search}'
+        `
+        try {
+            const found = await db.query(command)
+            return found.rows.length === 0 ? false : found.rows
+        } catch (err) {
+            throw err
         }
     }
 }

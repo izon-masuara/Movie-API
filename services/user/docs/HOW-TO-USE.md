@@ -13,7 +13,6 @@
     ```
         npm start migrate
     ```
-3. Ctrl + C
 
 ## Running APP
 

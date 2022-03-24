@@ -17,7 +17,7 @@ const createUser = async (req, res, next) => {
     const payload = req.body
     try {
         const data = await Users.createUser(payload)
-        sendMail(data.email)
+        // sendMail(data.email)
         res.status(201).json(`Email with name ${data.email} created`)
     } catch (err) {
         next(err)
@@ -30,7 +30,7 @@ const updateStatus = async (req, res, next) => {
     try {
         const found = await Users.findByID(id)
         if(!found){
-            next({
+            throw({
                 code: `404`,
                 message: `Data not found`
             })
@@ -39,10 +39,7 @@ const updateStatus = async (req, res, next) => {
         const success = await Users.updateStatus(status, user_id)
         res.status(200).json(`Email ${success.email} success updated with status ${success.status}`)
     } catch (err) {
-        next({
-            code: `500`,
-            message: `Internal server error`
-        })
+        next(err)
     }
 }
 
@@ -51,7 +48,7 @@ const deleteUser = async (req,res,next) => {
     try {
         const found = await Users.findByID(id)
         if(!found){
-            next({
+            throw({
                 code: `404`,
                 message: `Data not found`
             })
@@ -60,10 +57,7 @@ const deleteUser = async (req,res,next) => {
         await Users.destroy(user_id)
         res.status(200).json(`User with email ${found.rows[0].email} has been deleted`)
     } catch (err) {
-        next({
-            code : `500`,
-            message : `Internal server error`
-        })
+        next(err)
     }
 }
 
