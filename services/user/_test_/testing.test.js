@@ -159,6 +159,7 @@ describe(`PATCH /users`, () => {
                 expect(body).toBe(`Email ${user1.email} success updated with status active`)
                 done()
             })
+            .catch(err => done(err))
     })
 
     it(`Data which want to update not found`, done => {
@@ -171,6 +172,7 @@ describe(`PATCH /users`, () => {
                 expect(body).toBe('Data not found')
                 done()
             })
+            .catch(err => done(err))
     })
 
     it(`Status faild update because money does not 20000`, done => {
@@ -183,6 +185,7 @@ describe(`PATCH /users`, () => {
                 expect(body).toBe('Your money must be 20000')
                 done()
             })
+            .catch(err => done(err))
     })
 })
 
@@ -196,6 +199,7 @@ describe(`Delete /users`, () => {
                 expect(body).toBe(`User with email ${user5.email} has been deleted`)
                 done()
             })
+            .catch(err => done(err))
     })
 })
 
@@ -263,5 +267,6 @@ describe('GET /Login', () => {
                 expect(body).toBe('Logout')
                 done()
             })
+            .catch(err => done(err))
     })
 });
