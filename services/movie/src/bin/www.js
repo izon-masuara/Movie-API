@@ -2,10 +2,10 @@ import { app } from "..";
 import dotenv from 'dotenv'
 import connect from '../db/config/config'
 dotenv.config()
-const port = process.env.PORT = 3000
+const port = process.env.PORT || 3001
 
 connect()
-    .then(res => {
+    .then(_ => {
         console.log('success')
         app.listen(port, _ => {
             console.log(`http://localhost${port}`)
