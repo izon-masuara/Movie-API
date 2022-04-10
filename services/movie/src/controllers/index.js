@@ -18,17 +18,17 @@ const createData = async (req, res, next) => {
         year,
         by
     } = req.body
-    const { filename, mimetype, uploadDate } = req.file
+    const { filename,uploadDate } = req.file
+
+    const image = {
+        filename,
+        uploadDate
+    }
 
     const arrGenre = await coma(genre)
 
     const payload = {
         title: title,
-        image: {
-            filename: filename,
-            mimetype: mimetype,
-            uploadDate: uploadDate
-        },
         description: description,
         genre: arrGenre,
         production: {
@@ -37,39 +37,72 @@ const createData = async (req, res, next) => {
         }
     }
     try {
-        const created = await MovieModel.Create(payload)
+        const created = await MovieModel.Create(payload,image)
         res.status(201).json(`${created.data.title} success added`)
     } catch (err) {
         console.log(err)
     }
 }
 
-const updateData = async (req, res, next) => {
+const patchData = async (req,res,next) => {
     const { id } = req.params
-
-    const {
+    const { 
         title,
         description,
         genre,
-        year,
-        by
+        production,
+        year
     } = req.body
 
     const arrGenre = await coma(genre)
 
     const payload = {
-        title: title,
-        description: description,
-        genre: arrGenre,
-        production: {
-            year: year,
-            productionBy: by
+        title,
+        description,
+        genre : arrGenre,
+        production : {
+            productionBy : production,
+            year
         }
     }
+    const updated = await MovieModel.patchMovie(id,payload)
+    res.status(200).json(`update to ${updated.data.title} success`)
+}
 
+const like = async (req, res, next) => {
+    const { id } = req.params
+    const { user_id,username } = req.body
     try {
-        const updated = await MovieModel.update(id, payload)
-        res.status(200).json(updated)
+        await MovieModel.like(id,username,user_id)
+        res.status(201).json('success')
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const destroy = async (req,res,next) => {
+    const { id } = req.params
+    try {
+        const deleteData = await MovieModel.destroy(id)
+        res.status(200).json('success delete data')
+    } catch (err) {
+        
+    }
+}
+
+const viewImage = async (req,res,next) => {
+    const { id } = req.params
+    try {
+        const image = await MovieModel.viewImage(id)
+        image.on("data", data => {
+            res.status(200).write(data);
+        })
+        image.on("err", err => {
+            res.status(200).json(`Cannot display image`);
+        })
+        image.on("end", () => {
+            res.end()
+        })
     } catch (err) {
         console.log(err)
     }
@@ -78,5 +111,8 @@ const updateData = async (req, res, next) => {
 export {
     getAll,
     createData,
-    updateData
+    patchData,
+    like,
+    destroy,
+    viewImage
 }

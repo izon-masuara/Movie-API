@@ -8,25 +8,10 @@ const movieModel = new Schema({
             type: String,
             required: true
         },
-        image: {
-            filename: {
-                type: String,
-                required: true
-            },
-            mimetype: {
-                type: String,
-                required: true
-            },
-            uploadDate: {
-                type: Date,
-                required: true
-            }
-        },
         description: {
             type: String,
             required: true
         },
-        like: [],
         genre: {
             type: Array,
             lowercase: true,
@@ -36,14 +21,17 @@ const movieModel = new Schema({
             year: String,
             productionBy: String
         },
-        created_at: {
-            type: Date,
-            default: Date.now
-        },
-        updated_at: {
-            type: Date,
-            default: Date.now
-        }
+    },
+    like: {
+        type : Array
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now
     },
     image : {}
 })
