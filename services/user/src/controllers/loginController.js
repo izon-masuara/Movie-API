@@ -21,7 +21,7 @@ const loginController = async (req, res, next) => {
             }
         }
         const token = signJwt(data)
-        await Login.login(data.user_id, token)
+        const test = await Login.login(data.user_id, token)
         res.status(200).json({ access_token: token })
     } catch (err) {
         next(err)

@@ -12,6 +12,7 @@ class Login {
             const data = await db.query(command, [id, code, created_at])
             return data.rows[0]
         } catch (err) {
+            console.log(err)
             throw err
         }
     }
