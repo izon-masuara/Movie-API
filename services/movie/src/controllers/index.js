@@ -20,7 +20,7 @@ const createData = async (req, res, next) => {
     } = req.body
     const { filename,uploadDate } = req.file
 
-    const image = {
+    const video = {
         filename,
         uploadDate
     }
@@ -37,7 +37,7 @@ const createData = async (req, res, next) => {
         }
     }
     try {
-        const created = await MovieModel.Create(payload,image)
+        const created = await MovieModel.Create(payload,video)
         res.status(201).json(`${created.data.title} success added`)
     } catch (err) {
         console.log(err)
@@ -90,10 +90,10 @@ const destroy = async (req,res,next) => {
     }
 }
 
-const viewImage = async (req,res,next) => {
+const viewVideo = async (req,res,next) => {
     const { id } = req.params
     try {
-        const image = await MovieModel.viewImage(id)
+        const image = await MovieModel.viewVideo(id)
         image.on("data", data => {
             res.status(200).write(data);
         })
@@ -114,5 +114,5 @@ export {
     patchData,
     like,
     destroy,
-    viewImage
+    viewVideo
 }

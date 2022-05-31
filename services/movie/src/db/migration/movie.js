@@ -33,7 +33,7 @@ const movieModel = new Schema({
         type: Date,
         default: Date.now
     },
-    image : {}
+    video : {}
 })
 
 const Movie = mongoose.model('Movie', movieModel)

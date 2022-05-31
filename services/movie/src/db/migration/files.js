@@ -23,6 +23,6 @@ const fileModel = new Schema({
     } 
 })
 
-const File = mongoose.model('images.files',fileModel)
+const File = mongoose.model('videos.files',fileModel)
 
 export default File

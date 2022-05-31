@@ -13,6 +13,6 @@ const chunks = new Schema({
     },
 });
 
-const Chunk = mongoose.model('images.chunks',chunks)
+const Chunk = mongoose.model('videos.chunks',chunks)
 
 export default Chunk

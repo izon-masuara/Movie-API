@@ -5,7 +5,7 @@ import { hasPass } from '../../helpers/bcrypt'
 class Users {
     static async findAll() {
         const command = `
-        SELECT *
+        SELECT user_id,email,status,expired
         FROM users
         `
         try {
@@ -91,7 +91,7 @@ class Users {
             WHERE user_id = ${id}
         `
         try {
-            await db.query(command)
+            const deleted = await db.query(command)
         } catch (err) {
             throw err
         }

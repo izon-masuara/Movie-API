@@ -52,7 +52,7 @@
 
 - Request Header 
 ```
-    None
+    access_token
 ```
 
 - Request Body 
@@ -62,7 +62,7 @@
 
 - Request Params
 ```
-    id : <interger>
+    None
 ```
 
 ### DELETE /users/{id}
