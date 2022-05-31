@@ -6,9 +6,12 @@ import {
     deleteUser
 } from "../controllers/userController";
 import { payment } from "../middlewares/midtrans";
+import { auth } from "../middlewares/auth";
 export const userRouter = express.Router()
 
 userRouter.get('/', getAllUser)
 userRouter.post('/', createUser)
-userRouter.patch('/:id',payment,updateStatus)
-userRouter.delete('/:id', deleteUser)
+// Auth
+userRouter.use(auth)
+userRouter.patch('/',payment,updateStatus)
+userRouter.delete('/', deleteUser)

@@ -6,7 +6,7 @@ const storage = GridFsStorage({
     url: url,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
     file: (req, file) => {
-        const match = ["image/png", "image/jpeg","video/mp4"];
+        const match = ["video/mp4"];
 
         if (match.indexOf(file.mimetype) === -1) {
             const filename = `${Date.now()}-${file.originalname}`;
@@ -14,7 +14,7 @@ const storage = GridFsStorage({
         }
 
         return {
-            bucketName: 'images',
+            bucketName: 'videos',
             filename: `${Date.now()}-${file.originalname}`
         };
     }

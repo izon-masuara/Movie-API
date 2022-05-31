@@ -5,16 +5,19 @@ import {
     patchData,
     like,
     destroy,
-    viewImage
+    viewVideo
 } from '../controllers'
 import { upload } from '../middlewares/multer'
 const router = express.Router()
 
 router.get('/', getAll)
-router.post('/', upload.single('image'), createData)
-router.patch('/:id', patchData)
+// Auth Login user status active
+router.get('/:id', viewVideo)
 router.patch('/like/:id', like)
+// All of routes above this must be way Auth as admin 
+// Upload Video
+router.post('/', upload.single('video'), createData) //<<<<<<< Upload Video 
+router.patch('/:id', patchData)
 router.delete('/:id', destroy)
-router.get('/:id', viewImage)
 
 export default router

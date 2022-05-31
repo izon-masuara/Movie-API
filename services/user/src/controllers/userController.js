@@ -25,7 +25,7 @@ const createUser = async (req, res, next) => {
 }
 
 const updateStatus = async (req, res, next) => {
-    const id = +req.params.id
+    const id = req.id.id
     const status = req.status
     try {
         const found = await Users.findByID(id)
@@ -44,7 +44,7 @@ const updateStatus = async (req, res, next) => {
 }
 
 const deleteUser = async (req,res,next) => {
-    const id = +req.params.id
+    const id = req.id.id
     try {
         const found = await Users.findByID(id)
         if(!found){

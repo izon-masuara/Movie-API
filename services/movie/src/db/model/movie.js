@@ -1,5 +1,5 @@
 import { Movie,File } from '../migration'
-import { getImage } from '../../helper/getImage'
+import { getVideo } from '../../helper/getVideo'
 
 export default class MovieModel {
     static async findAll(){
@@ -14,22 +14,23 @@ export default class MovieModel {
         }
     }
 
-    static async Create(payload,image){
+    static async Create(payload,video){
         try {
             const find = await File.find({
-                filename : image.filename,
-                uploadDate : image.uploadDate
+                filename : video.filename,
+                uploadDate : video.uploadDate
             })
+            console.log(find)
             if(find.length === 0){
-                // delete image 
+                // delete video 
                 throw {
                     code : 404,
-                    message :  `Your image fail added`
+                    message :  `Your video fail added`
                 }
             }
             const payloadCreated = {
                 data : payload,
-                image : find
+                video : find
             }
             const created = await Movie.create(payloadCreated)
             return created
@@ -43,7 +44,7 @@ export default class MovieModel {
             const updated = await Movie.findByIdAndUpdate({ _id:id }, { data : payload })
             return updated
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
@@ -71,13 +72,13 @@ export default class MovieModel {
     static async destroy(id){
         try {
             const found = await Movie.findByIdAndDelete({_id:id})
-            await Movie.findByIdAndDelete({ _id : found.image[0]._id })
+            await Movie.findByIdAndDelete({ _id : found.video[0]._id })
         } catch (err) {
             console.log(err)
         }
     }
 
-    static async viewImage(id){
+    static async viewVideo(id){
         try {
             const found = await Movie.findById({_id:id})
             if(found === null){
@@ -86,8 +87,8 @@ export default class MovieModel {
                     message : `Data not found`
                 }
             }
-            const image = await getImage(found.image[0].filename)
-            return image
+            const video = await getVideo(found.video[0].filename)
+            return video
         } catch (err) {
             console.log(err)
         }
