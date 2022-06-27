@@ -1,6 +1,6 @@
 import { Users, Login } from "../db/model"
 import { comparePass } from "../helpers/bcrypt"
-import { signJwt } from '../helpers/jsonwebtoken'
+import { signJwt, decodeJwt } from '../helpers/jsonwebtoken'
 
 const loginController = async (req, res, next) => {
     const { email, password } = req.body
@@ -30,7 +30,20 @@ const loginController = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
     try {
-        const data = await Login.getAll()
+        const decode = decodeJwt(req.headers.accesstoken)
+        if (decode.code !== undefined) {
+            throw decode
+        }
+        const found = await Users.findByID(+decode.id)
+        if (found.rows[0] === undefined) throw {
+            code: 404,
+            message: 'Data not found'
+        }
+        const data = {
+            user_id: found.rows[0].user_id,
+            status: found.rows[0].status,
+            role: found.rows[0].role
+        }
         res.status(200).json(data)
     } catch (err) {
         next(err)
