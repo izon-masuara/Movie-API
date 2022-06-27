@@ -31,6 +31,9 @@ const errorUserHandler = (err, req, res, next) => {
         case `23505`:
             res.status(400).json(err.constraint)
             break
+        case '1092' :
+            res.status(401).json(err.message) 
+            break;
         default:
             break;
     }

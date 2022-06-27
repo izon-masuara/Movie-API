@@ -11,8 +11,16 @@ const signJwt = (payload) => {
     return jwt.sign(user,privateKey)
 }
 
-const decodeJwt = (payload) => {
-    return jwt.verify(payload,privateKey)
+const decodeJwt =  (payload) => {
+    return jwt.verify(payload,privateKey, (err,decode) => {
+        if(err){
+            return {
+                code : '1092',
+                message : 'Invalid token'
+            }
+        }
+        return decode
+    })
 }
 
 export {

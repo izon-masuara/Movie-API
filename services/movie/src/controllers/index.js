@@ -70,6 +70,7 @@ const patchData = async (req,res,next) => {
 }
 
 const like = async (req, res, next) => {
+    console.log('masuk di like')
     const { id } = req.params
     const { user_id,username } = req.body
     try {
@@ -93,14 +94,14 @@ const destroy = async (req,res,next) => {
 const viewVideo = async (req,res,next) => {
     const { id } = req.params
     try {
-        const image = await MovieModel.viewVideo(id)
-        image.on("data", data => {
+        const video = await MovieModel.viewVideo(id)
+        video.on("data", data => {
             res.status(200).write(data);
         })
-        image.on("err", err => {
-            res.status(200).json(`Cannot display image`);
+        video.on("err", err => {
+            res.status(200).json(`Cannot display video`);
         })
-        image.on("end", () => {
+        video.on("end", () => {
             res.end()
         })
     } catch (err) {

@@ -20,7 +20,6 @@ export default class MovieModel {
                 filename : video.filename,
                 uploadDate : video.uploadDate
             })
-            console.log(find)
             if(find.length === 0){
                 // delete video 
                 throw {
