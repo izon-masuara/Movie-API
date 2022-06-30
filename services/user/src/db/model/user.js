@@ -34,19 +34,19 @@ class Users {
     }
 
     static async createUser(payload) {
+        const {email,password} = payload
 
-        const {
-            email,
-            password,
-            status,
-            expired,
-            role
-        } = payload
+        const register = {
+            status : 'inactive',
+            expired : '2010-10-23',
+            role : 'member',
+        }
+
 
         try {
             const emailUser = isEmail(email)
             const secretPass = hasPass(password)
-            const userStatus = statusValidate(status)
+            const userStatus = statusValidate(register.status)
             const created_at = new Date()
 
             const command = `
@@ -56,7 +56,7 @@ class Users {
             `
 
             const data = await db.query(command,
-                [emailUser, secretPass, userStatus, expired, role, created_at]
+                [emailUser, secretPass, userStatus, register.expired, register.role, created_at]
             )
 
             return data.rows[0]

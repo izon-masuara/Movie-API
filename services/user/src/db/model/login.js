@@ -43,6 +43,12 @@ class Login {
         `
         try {
             const data = await db.query(command)
+            if(data.rows.length === 0){
+                throw {
+                    code : '404',
+                    message : 'Data not Found'
+                }
+            }
             return data.rows[0]
         } catch (err) {
             throw {

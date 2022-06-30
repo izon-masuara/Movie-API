@@ -1,7 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server';
 import axios from "axios";
-import { Blob } from 'node:buffer'
-import { URL } from 'node:url';
 const typeDefs = gql`
     type Production {
         year : String,
@@ -45,16 +43,14 @@ const typeDefs = gql`
         user(email:String,password:String) : String
         movies : [Movie]
         movie(id:String,accessToken:String) : User_Login
+        logout(accessToken:String) : String
     }
 
     type Mutation {
         addUser(
             email : String,
             password : String,
-            status : String,
-            expired : String,
-            role : String
-        ):User
+        ):[String],
     }
     
 `;
@@ -88,7 +84,7 @@ const resolvers = {
                 if (user) {
                     return user
                 } else {
-                    return 'Acess Danied'
+                    return Error('Access Danied')
                 }
             } catch (err) {
                 const { data } = err.response
@@ -111,6 +107,15 @@ const resolvers = {
                     return Error(data)
                 }
             }
+        },
+        async logout(_,args){
+            const { accessToken } = args
+            const { data } = await axios.delete(`${userUrl}/login/${accessToken}`)
+            try {
+                return data
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 
@@ -119,17 +124,13 @@ const resolvers = {
             const payload = {
                 email: args.email,
                 password: args.password,
-                status: args.status,
-                expired: args.expired,
-                role: args.role
             }
-
             try {
                 const { data } = await axios.post(`${userUrl}/users`, payload)
                 return data
             } catch (err) {
                 const { data } = err.response
-                return data
+                return Error(data)
             }
         }
     }

@@ -1,6 +1,5 @@
 export const auth = (req,res,next) => {
-    console.log(req.headers.status)
-    if(req.headers.status === undefined || req.headers.status === 'null') {
+    if(req.headers.status !== 'active') {
         next({
             code : 401,
         })
