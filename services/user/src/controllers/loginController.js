@@ -51,16 +51,18 @@ const getAll = async (req, res, next) => {
 }
 
 const logOut = async (req, res, next) => {
-    const { id } = req.params
+    const { id  } = req.params
+    const decode = decodeJwt(id)
+    const user_id = decode.id
     try {
-        const found = await Login.findById(+id)
+        const found = await Login.findById(+user_id)
         if (!found) {
             throw {
                 code: '404',
                 message: "Data not found"
             }
         }
-        await Login.logOut(+id)
+        await Login.logOut(+found.user_id)
         res.status(200).json(`Logout`)
     } catch (err) {
         next(err)

@@ -21,6 +21,15 @@ router.patch('/like/:id', like)
 router.post('/',upload.single('video'), createData) //<<<<<<< Upload Video 
 router.patch('/:id', patchData)
 router.delete('/:id', destroy)
+
+/**
+ * 
+ * Refactor program
+ * 
+ * authorization upload image and create data then 
+ * upload the video with the id from data
+ */
+
 router.use(errHandlers)
 
 export default router
